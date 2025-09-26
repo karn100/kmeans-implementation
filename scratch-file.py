@@ -41,8 +41,9 @@ class Kmeans_scratch:
     
     def _compute_distance(self,X,centroids):
 
-        if self.distance == "euclidean":
+        if self.distance == "euclidean":               #L2 regularisation
             return np.linalg.norm(X[:,np.newaxis] - centroids,axis=2)
         
-        elif self.distance == "manhattan":
-            return np.linalg.norm
+        elif self.distance == "manhattan":            #L1 regularisation
+            return np.sum(np.abs(X[:,np.newaxis] - centroids),axis=2)
+        
