@@ -17,7 +17,7 @@ class Kmeans_scratch:
         self.inertia = None
         self.inertia_history = []
 
-    def _init_centroid(self,X,):
+    def _init_centroid(self,X):
         n_samples = X.shape[0]
         rng = np.random.default_rng(self.random_state)
         if self.init == "random":
@@ -58,14 +58,14 @@ class Kmeans_scratch:
         rng = np.random.default_rng(self.random_state)
 
         for run in range(self.n_init):
-            centroids = self._init_centroid(X,rng)
+            centroids = self._init_centroid(X)
             ineria_history = []
             for it in range(self.max_iters):
                 distance = self._compute_distance(X,centroids)
                 labels = np.argmin(distance,axis=1)
 
                 new_centroids = np.array([
-                    X[labels == j].mean(axis=0) if np.any(labels == j) else centroids[j] for j in range
+                    X[labels == j].mean(axis=0) if np.any(labels == j) else centroids[j] for j in range(self.k)
                 ])
                 inertia = self._compute_inertia(X,labels,new_centroids)
                 ineria_history.append(inertia)
