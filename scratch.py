@@ -58,7 +58,7 @@ class Kmeans_scratch:
         rng = np.random.default_rng(self.random_state)
 
         for run in range(self.n_init):
-            centroids = self._init_centroid
+            centroids = self._init_centroid(X,rng)
             ineria_history = []
             for it in range(self.max_iters):
                 distance = self._compute_distance(X,centroids)
